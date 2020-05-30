@@ -1,0 +1,70 @@
+/**index.wxss**/
+
+.map{
+  width: 100%;
+  height: 550rpx;
+}
+.statsWrap{
+  display: flex;
+  margin: 30rpx;
+}
+.stats__item{
+  font-size: 24rpx;
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  align-items: center;
+}
+.confirmed {
+  color: #f74c31;
+}
+
+.suspected {
+  color: #f78207;
+}
+
+.serious {
+  color: #a25a4e;
+}
+
+.dead {
+  color: #5d7092;
+}
+
+.cured {
+  color: #28b7a3;
+}
+.status{
+  color: #333;
+  font-size: 30rpx;
+}
+
+.column-title {
+  margin: 20rpx;
+  padding-left: 20rpx;
+  border-left: 4px solid #07c160;
+}
+
+.column-title.txt {
+  font-size: 2em;
+}
+.daily-swiper{
+  height: 400rpx;
+}
+.daily-swiper .daily-img{
+  width: 100%;
+}
+/* 注意的是普通样式类和外部样式类的优先级是未定义的，因此使用时请添加!important以保证外部样式类的优先级。 */
+.ellipsis{
+  color: black!important;
+  font-size: 30rpx!important;
+  text-align: center!important;
+  width: 190rpx!important;
+}
+.tips,.btn-back{
+  margin-left: 20rpx; 
+  margin-top: 20rpx;
+}
+.btn-back{
+  font-weight: 400;
+}

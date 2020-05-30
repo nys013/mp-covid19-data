@@ -1,0 +1,151 @@
+<!--index.wxml-->
+<view class="container">
+  
+  <van-notice-bar
+      custom-class="notice-bar"
+      speed="30"
+      backgroundColor="#fff"
+      left-icon="volume-o"
+      text="武汉加油！本应用内数据源于第三方统计，数据略微滞后，仅供学习参考！"
+    />
+    <van-skeleton title row="3" loading='{{isLoading}}'>
+      <view  class='statsWrap'>
+        <view class="stats__item confirmed">
+          <text class="count">{{stats.confirmedCount}}</text>
+          <text class="status">确诊</text>
+          <text class="increased">{{confirmInc}}</text>
+        </view>
+        <view class="stats__item suspected">
+          <text class="count">{{stats.suspectedCount}}</text>
+          <text class="status">疑似</text>
+          <text class="increased">{{suspectedInc}}</text>
+        </view>
+        <view class="stats__item serious">
+          <text class="count">{{stats.seriousCount}}</text>
+          <text class="status">严重</text>
+          <text class="increased">{{seriousInc}}</text>
+        </view>
+        <view class="stats__item dead">
+          <text class="count">{{stats.deadCount}}</text>
+          <text class="status">死亡</text>
+          <text class="increased">{{deadInc}}</text>
+        </view>
+        <view class="stats__item cured">
+          <text class="count">{{stats.curedCount}}</text>
+          <text class="status">治愈</text>
+          <text class="increased">{{curedInc}}</text>
+        </view>
+      </view>
+    </van-skeleton>
+    <view class="column-title">
+      <text class="txt">疫情地图</text>
+    </view>
+    <map class="map" provinceData='{{provinceData}}' ></map>
+
+    <view class="column-title">
+      <text class="txt">疫情小知识</text>
+    </view>
+    <view>
+      <van-cell title="小知识1" icon="info-o" label="{{stats.note1}}" />
+      <van-cell title="小知识2" icon="info-o" label="{{stats.note2}}" />
+      <van-cell title="小知识3" icon="info-o" label="{{stats.note3}}" />
+      <van-cell title="小知识4" icon="info-o" label="{{stats.remark1}}" />
+      <van-cell title="小知识5" icon="info-o" label="{{stats.remark2}}" />
+      <van-cell title="小知识6" icon="info-o" label="{{stats.remark3}}" />
+    </view>
+    
+    <view class="column-title">
+      <text class="txt">疫情趋势</text>
+    </view>
+    <swiper
+      class="daily-swiper"
+      indicator-dots
+      autoplay
+      circular="true"
+      interval="{{3000}}">
+      <swiper-item wx:for="{{stats.dailyPics}}" wx:key="index">
+        <image
+          class="daily-img"
+          lazy-load
+          mode="widthFix"
+          src="{{item}}">
+        </image>
+      </swiper-item>
+    </swiper>
+
+    <view class="column-title" id="chinaDataTitle">
+      <text class="txt">国内疫情数据</text>
+    </view>
+    <view class="china-data__wrapper {{isLoadingAreaData ? 'china-data__wrapper--loading' : ''}}">
+      <view hidden="{{isLoadingAreaData}}">
+        <view hidden="{{isShowCity}}">
+          <text class="tips">提示：点击某个省份可以查看详细数据</text>
+          <van-cell-group>
+            <van-cell>
+              <van-grid>
+                <van-grid-item text="地区" />
+                <van-grid-item text="确诊" />
+                <van-grid-item text="死亡" />
+                <van-grid-item text="治愈" />
+                <view wx:for="{{provinceData}}" wx:key="id" data-provinceName="{{item.provinceShortName}}" bind:tap="handleTapProvince">
+                  <van-grid-item use-slot>
+                    <text class="ellipsis">{{item.provinceShortName}}</text>
+                  </van-grid-item>
+                  <!-- <van-grid-item text="{{item.provinceShortName}}" /> -->
+                  <van-grid-item text="{{item.confirmedCount}}" />
+                  <van-grid-item text="{{item.deadCount}}" />
+                  <van-grid-item text="{{item.curedCount}}" />
+                </view>
+              </van-grid>
+            </van-cell>
+          </van-cell-group>
+        </view>
+        <view hidden='{{!isShowCity}}'>
+          <button class="btn-back" size="mini" bind:tap="gobackProvince">返回省级数据</button>
+          <view class="tips">{{cityData.provinceName}}</view>
+          <van-cell-group border='{{false}}'> 
+            <van-cell>
+              <van-grid >
+                <van-grid-item text="市县" />
+                <van-grid-item text="确诊" />
+                <van-grid-item text="死亡" />
+                <van-grid-item text="治愈" />
+                <view wx:for="{{cityData.cities}}" wx:key="id">
+                <!-- 两种用法，一用插槽，就可自定义样式，二是外部样式，注意优先级 -->
+                  <!-- <van-grid-item use-slot>
+                    <text class="ellipsis">{{item.cityName}}</text>
+                  </van-grid-item> -->
+                  <van-grid-item text-class="ellipsis" text="{{item.cityName}}" />
+                  <van-grid-item text="{{item.confirmedCount}}" />
+                  <van-grid-item text="{{item.deadCount}}" />
+                  <van-grid-item text="{{item.curedCount}}" />
+                </view>
+              </van-grid>
+            </van-cell>
+          </van-cell-group>
+        </view>
+      </view>
+    </view>
+
+    <view class="column-title">
+      <text class="txt">海外其他地区疫情数据</text>
+    </view>
+    <van-cell-group>
+      <van-cell>
+        <van-grid>
+          <van-grid-item text="地区" />
+          <van-grid-item text="确诊" />
+          <van-grid-item text="死亡" />
+          <van-grid-item text="治愈" />
+          <view wx:for="{{overseaStats}}" wx:key="id">
+            <van-grid-item use-slot>
+              <text class="ellipsis">{{item.provinceName}}</text>
+            </van-grid-item>
+            <van-grid-item text="{{item.confirmedCount}}" />
+            <van-grid-item text="{{item.deadCount}}" />
+            <van-grid-item text="{{item.curedCount}}" />
+          </view>
+        </van-grid>
+      </van-cell>
+    </van-cell-group>
+</view>
