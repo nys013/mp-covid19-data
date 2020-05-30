@@ -57,9 +57,13 @@
 /* 注意的是普通样式类和外部样式类的优先级是未定义的，因此使用时请添加!important以保证外部样式类的优先级。 */
 .ellipsis{
   color: black!important;
-  font-size: 30rpx!important;
+  font-size: 27rpx!important;
   text-align: center!important;
-  width: 190rpx!important;
+  overflow: hidden!important;
+  width: 100%!important;
+  overflow: hidden!important;
+  text-overflow: ellipsis!important;
+  white-space: nowrap!important;
 }
 .tips,.btn-back{
   margin-left: 20rpx; 

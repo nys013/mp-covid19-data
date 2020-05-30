@@ -1,7 +1,30 @@
 {
   "pages":[
-    "pages/index/index"
+    "pages/index/index",
+    "pages/knowledge/index",
+    "pages/rumour/index",
+    "pages/realtime/index"
   ],
+  "tabBar":{
+    "list":[
+      {
+        "text":"主页",
+        "pagePath":"pages/index/index"
+      },
+      {
+        "text":"小知识",
+        "pagePath":"pages/knowledge/index"
+      },
+      {
+        "text":"谣言",
+        "pagePath":"pages/rumour/index"
+      },
+      {
+        "text":"近期事件",
+        "pagePath":"pages/realtime/index"
+      }
+    ]
+  },
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",

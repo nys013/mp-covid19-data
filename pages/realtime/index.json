@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "van-panel": "../../miniprogram_npm/@vant/weapp/panel/index"
+  }
+}

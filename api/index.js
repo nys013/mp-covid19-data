@@ -18,5 +18,5 @@ export const GetRumourData = params => api.get(`rumour`, params);
 // 查询知识wiki
 export const GetWikiData = params => api.get(`wiki`, params);
 
-// 查询发生事件
+// 查询发生事件(参数：pageNo , pageSize)
 export const GetTimelinePageData = params => api.get(`timeline`, params);
