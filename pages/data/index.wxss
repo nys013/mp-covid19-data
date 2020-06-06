@@ -1,0 +1,41 @@
+
+.column-title {
+  margin: 20rpx;
+  padding-left: 20rpx;
+  border-left: 4px solid #07c160;
+}
+
+.column-title.txt {
+  font-size: 2em;
+}
+
+.china-data__wrapper{
+  padding: 0 20rpx;
+}
+.data-list-wrap{
+  margin: 20rpx 0;
+}
+.col{
+  height: 100rpx;
+  line-height: 100rpx;
+  text-align: center;
+  font-size: 28rpx;
+  border-right: 1rpx solid #eee;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.col.left{
+  font-weight: bold;
+}
+.col.right{
+  border: none;
+}
+.col-title{
+  border-top:  1rpx solid #eee;
+  border-bottom:  1rpx solid #eee;
+  background-color: rgb(239, 239, 247);
+}
+.col-item-wrap{
+  border-bottom: 1rpx solid #eee;
+}

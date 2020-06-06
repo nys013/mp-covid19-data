@@ -1,0 +1,73 @@
+<!--data.wxml-->
+<view class="container">
+  <van-notice-bar
+      custom-class="notice-bar"
+      speed="30"
+      backgroundColor="#fff"
+      left-icon="volume-o"
+      text="武汉加油！本应用内数据源于第三方统计，数据略微滞后，仅供学习参考！"
+    />
+
+    <view class="column-title" id="chinaDataTitle" wx:if='{{provinceData.length}}'>
+      <text class="txt">国内疫情数据</text>
+    </view>
+    <view class="china-data__wrapper" wx:if='{{provinceData.length}}'>
+        <view hidden="{{isShowCity}}">
+          <text class="tips">提示：点击某个省份可以查看详细数据</text>
+          <view class="data-list-wrap">
+          <!-- 这里就应该使用layout布局更合适，cell布局无法调节单元格宽度不一不够好 -->
+            <van-row>
+              <van-col custom-class='col-title col' span="7">地区</van-col>
+              <van-col custom-class='col-title col' span="6">确诊</van-col>
+              <van-col custom-class='col-title col' span="6">死亡</van-col>
+              <van-col custom-class='col-title col' span="5">治愈</van-col>
+            </van-row>
+            <van-row custom-class='col-item-wrap' wx:for='{{provinceData}}' wx:key='id'
+             bind:tap='handleTapProvince' data-provincename='{{item.provinceShortName}}'>
+              <van-col custom-class='col-item col left' span="7">{{item.provinceShortName}}</van-col>
+              <van-col custom-class='col-item col'  span="6">{{item.confirmedCount}}</van-col>
+              <van-col custom-class='col-item col'  span="6">{{item.deadCount}}</van-col>
+              <van-col  custom-class='col-item col right' span="5">{{item.curedCount}}</van-col>
+            </van-row>
+          </view>
+        </view>
+
+        <view hidden='{{!isShowCity}}'>
+          <button class="btn-back" size="mini" bind:tap="gobackProvince">返回省级数据</button>
+          <view class="tips">{{cityData.provinceName}}</view>
+          <view class="data-list-wrap">
+            <van-row>
+              <van-col custom-class='col-title col' span="7">市县</van-col>
+              <van-col custom-class='col-title col' span="6">确诊</van-col>
+              <van-col custom-class='col-title col' span="6">死亡</van-col>
+              <van-col custom-class='col-title col' span="5">治愈</van-col>
+            </van-row>
+            <van-row custom-class='col-item-wrap' wx:for='{{cityData.cities}}' wx:key='id'>
+              <van-col custom-class='col-item col left' span="7">{{item.cityName}}</van-col>
+              <van-col custom-class='col-item col'  span="6">{{item.confirmedCount}}</van-col>
+              <van-col custom-class='col-item col'  span="6">{{item.deadCount}}</van-col>
+              <van-col  custom-class='col-item col right' span="5">{{item.curedCount}}</van-col>
+            </van-row>
+          </view>
+        </view>
+
+    </view>
+
+    <view class="column-title" wx:if='{{overseaStats.length}}'>
+      <text class="txt">海外其他地区疫情数据</text>
+    </view>
+     <view class="data-list-wrap" wx:if='{{overseaStats.length}}'>
+      <van-row>
+        <van-col custom-class='col-title col' span="6">地区</van-col>
+        <van-col custom-class='col-title col' span="6">确诊</van-col>
+        <van-col custom-class='col-title col' span="6">死亡</van-col>
+        <van-col custom-class='col-title col' span="6">治愈</van-col>
+      </van-row>
+      <van-row custom-class='col-item-wrap' wx:for='{{overseaStats}}' wx:key='id'>
+        <van-col custom-class='col-item col left' span="6">{{item.provinceName}}</van-col>
+        <van-col custom-class='col-item col'  span="6">{{item.confirmedCount}}</van-col>
+        <van-col custom-class='col-item col'  span="6">{{item.deadCount}}</van-col>
+        <van-col  custom-class='col-item col right' span="6">{{item.curedCount}}</van-col>
+      </van-row>
+    </view>
+</view>

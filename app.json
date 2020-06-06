@@ -3,25 +3,42 @@
     "pages/index/index",
     "pages/knowledge/index",
     "pages/rumour/index",
-    "pages/realtime/index"
+    "pages/realtime/index",
+    "pages/data/index"
   ],
   "tabBar":{
+    "selectedColor":"#07c160",
+    "color":"#8a8a8a",
     "list":[
       {
         "text":"主页",
-        "pagePath":"pages/index/index"
+        "pagePath":"pages/index/index",
+        "iconPath":"./static/image/icon/zhuye.png",
+        "selectedIconPath":"./static/image/icon_active/zhuye.png"
+      },
+      {
+        "text":"数据",
+        "pagePath":"pages/data/index",
+        "iconPath":"./static/image/icon/shuju.png",
+        "selectedIconPath":"./static/image/icon_active/shuju.png"
       },
       {
         "text":"小知识",
-        "pagePath":"pages/knowledge/index"
+        "pagePath":"pages/knowledge/index",
+        "iconPath":"./static/image/icon/zhishi.png",
+        "selectedIconPath":"./static/image/icon_active/zhishi.png"
       },
       {
         "text":"谣言",
-        "pagePath":"pages/rumour/index"
+        "pagePath":"pages/rumour/index",
+        "iconPath":"./static/image/icon/liuyan.png",
+        "selectedIconPath":"./static/image/icon_active/liuyan.png"
       },
       {
         "text":"近期事件",
-        "pagePath":"pages/realtime/index"
+        "pagePath":"pages/realtime/index",
+        "iconPath":"./static/image/icon/shijianguanli.png",
+        "selectedIconPath":"./static/image/icon_active/shijianguanli.png"
       }
     ]
   },

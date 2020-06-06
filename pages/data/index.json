@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "van-notice-bar": "../../miniprogram_npm/@vant/weapp/notice-bar/index",
+    "van-row": "../../miniprogram_npm/@vant/weapp/row/index",
+    "van-col": "../../miniprogram_npm/@vant/weapp/col/index"
+  }
+}

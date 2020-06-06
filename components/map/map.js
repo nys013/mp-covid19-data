@@ -132,7 +132,7 @@ Component({
       chart.setOption(option);
       // this.setData({isLoadingMap:false})
      
-    },1000)
+    },500)
     
   },
 })

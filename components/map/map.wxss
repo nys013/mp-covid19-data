@@ -1,6 +1,6 @@
 /* components/map/map.wxss */
 .mapWrap{
-  height: 550rpx;
+  height: 600rpx;
   width: 100%;
 }
 .map{

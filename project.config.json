@@ -59,8 +59,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/realtime/index",
-					"pathName": "pages/realtime/index",
+					"name": "pages/data/index",
+					"pathName": "pages/data/index",
 					"query": "",
 					"scene": null
 				}

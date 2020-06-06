@@ -1,6 +1,4 @@
 <!--components/map/map.wxml-->
 <view class="mapWrap" hidden="{{isLoadingMap}}"> 
-   <canvas type='2d'>
-      <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" class="map"></ec-canvas>
-   </canvas>
+   <ec-canvas id="mychart-dom-bar" canvas-id="mychart-bar" ec="{{ ec }}" class="map"></ec-canvas>
 </view>
