@@ -39,7 +39,7 @@ Page({
       isLoadingAreaData: false,
       overseaStats
     })
-    // wx.hideLoading()
+    wx.hideLoading()
   },
   getIncrease(count){
     return count > 0 ? ('+' + count) : count

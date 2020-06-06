@@ -131,7 +131,7 @@ Component({
     
       chart.setOption(option);
       // this.setData({isLoadingMap:false})
-      wx.hideLoading()
+     
     },1000)
     
   },
