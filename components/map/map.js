@@ -15,7 +15,7 @@ function initChart(canvas, width, height, dpr) {
   canvas.setChart(chart);
   // 注册地图
   echarts.registerMap('china',geoJson)
-  // chart.setOption(option);
+  this.setOption(chart);
   return chart;
 }
 Component({
@@ -23,7 +23,7 @@ Component({
    * 组件的属性列表
    */
   properties: {
-    provinceData:Array
+    
   },
 
   /**
@@ -31,8 +31,8 @@ Component({
    */
   data: {
     ec: {
-      onInit: initChart,
-      isLoadingMap:false
+      // 将lazyLoad设为true后，就可手动初始化了
+      lazyLoad:true
     }
   },
 
@@ -40,21 +40,14 @@ Component({
    * 组件的方法列表
    */
   methods: {
-   
-  },
-
-  ready: async function() { 
-    // 数据比较旧
-    clearTimeout(timeout)
-    const timeout = setTimeout(()=>{
-      // console.log(this.data.provinceData);
-      // const result = await GetProvinceStatsData()
-      const data = this.data.provinceData.map((item,index) => {
+    setOption(chart,provinceData){
+      const data = provinceData.map((item,index) => {
         return {
           name:item.provinceShortName,
           value:item.currentConfirmedCount
         }
       })
+      
         // 地图内容配置
       const option = {
         // backgroundColor:"#F3F1F0",
@@ -130,9 +123,32 @@ Component({
       };
     
       chart.setOption(option);
-      // this.setData({isLoadingMap:false})
-     
-    },500)
-    
+    }
   },
+  lifetimes:{
+
+    ready:  async function() { 
+      // 因为这个数据只在这里用，可以直接在这里向后台发起请求
+      const provinceData = await GetProvinceStatsData()
+
+      // 首先获取组件,可在父组件里调用 this.selectComponent ，获取子组件的实例对象。
+      const ecComponent = this.selectComponent('#mychart-dom-bar');
+      ecComponent.init((canvas, width, height, dpr) =>{
+        // 这个不用管，固定写法
+        chart = echarts.init(canvas, null, {
+          width:width,
+          height:height,
+          devicePixelRatio: dpr // new
+        });
+        canvas.setChart(chart);
+        // 注册地图
+        echarts.registerMap('china',geoJson)
+        // 设置option
+        this.setOption(chart,provinceData);
+        // 最后一定要返回chart
+        return chart;
+      })
+      
+    },
+  }
 })
