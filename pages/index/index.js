@@ -10,6 +10,7 @@ Page({
     seriousInc: '',
     deadInc: '',
     curedInc: '',
+    provinceData:[],
   },
   //事件处理函数
 
@@ -18,7 +19,9 @@ Page({
       title: '加载中',
       mask:true
     })
-    const stats = await GetStatsData()
+    const results = await Promise.all( [GetProvinceStatsData() , GetStatsData()] )
+    const provinceData = results[0]
+    const stats = results[1]
     this.setData({
       stats,
       isLoading:false,
@@ -27,6 +30,7 @@ Page({
       seriousInc: this.getIncrease(stats.seriousIncr),
       deadInc: this.getIncrease(stats.deadIncr),
       curedInc: this.getIncrease(stats.curedIncr),
+      provinceData,
       isLoadingAreaData: false,
     })
     wx.hideLoading()

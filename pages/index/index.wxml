@@ -40,7 +40,7 @@
     <view class="column-title">
       <text class="txt">疫情地图</text>
     </view>
-    <map class="map" ></map>
+    <map class="map" provinceData='{{provinceData}}' ></map>
 
     <view class="column-title">
       <text class="txt">疫情小知识</text>

@@ -2,28 +2,19 @@ import * as echarts from '../../components/ec-canvas/echarts';
 import geoJson from './china';
 import {GetProvinceStatsData} from '../../api/index'
 
-// 为了能获取到chart实例，所以在函数外先定义
-let chart = null;
-
-function initChart(canvas, width, height, dpr) {
-  // 这个不用管，固定写法
-  chart = echarts.init(canvas, null, {
-    width:width,
-    height:height,
-    devicePixelRatio: dpr // new
-  });
-  canvas.setChart(chart);
-  // 注册地图
-  echarts.registerMap('china',geoJson)
-  this.setOption(chart);
-  return chart;
-}
 Component({
   /**
    * 组件的属性列表
    */
   properties: {
-    
+    provinceData:{
+      type:Array,
+      observer(news){
+        if(news.length){
+          this.initChart()
+        }
+      }
+    }
   },
 
   /**
@@ -40,15 +31,15 @@ Component({
    * 组件的方法列表
    */
   methods: {
-    setOption(chart,provinceData){
-      const data = provinceData.map((item,index) => {
+    setOption(chart){
+      const data = this.data.provinceData.map((item,index) => {
         return {
           name:item.provinceShortName,
           value:item.currentConfirmedCount
         }
       })
-      
-        // 地图内容配置
+
+      // 地图内容配置
       const option = {
         // backgroundColor:"#F3F1F0",
         // 提示框组件
@@ -121,21 +112,15 @@ Component({
         }],
     
       };
-    
+
       chart.setOption(option);
-    }
-  },
-  lifetimes:{
-
-    ready:  async function() { 
-      // 因为这个数据只在这里用，可以直接在这里向后台发起请求
-      const provinceData = await GetProvinceStatsData()
-
+    },
+    initChart(){
       // 首先获取组件,可在父组件里调用 this.selectComponent ，获取子组件的实例对象。
       const ecComponent = this.selectComponent('#mychart-dom-bar');
       ecComponent.init((canvas, width, height, dpr) =>{
         // 这个不用管，固定写法
-        chart = echarts.init(canvas, null, {
+        const chart = echarts.init(canvas, null, {
           width:width,
           height:height,
           devicePixelRatio: dpr // new
@@ -144,11 +129,14 @@ Component({
         // 注册地图
         echarts.registerMap('china',geoJson)
         // 设置option
-        this.setOption(chart,provinceData);
+        this.setOption(chart);
         // 最后一定要返回chart
         return chart;
       })
-      
-    },
+    }
+  },
+  
+  lifetimes:{
+
   }
 })
